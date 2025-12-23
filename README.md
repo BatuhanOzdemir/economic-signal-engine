@@ -1,0 +1,45 @@
+# Economic Signal Engine (ESE)
+
+Economic Signal Engine is a configuration-driven CLI tool that ingests macroeconomic time series (starting with TCMB EVDS),
+stores them locally, computes reusable metrics, and generates rule-based signals (info/warn/risk) as reproducible reports.
+
+## Why this exists
+Raw macro data may be available, but turning it into consistent, automated decision signals requires:
+- normalized storage
+- reproducible metrics
+- configurable rules
+- audit-friendly outputs (JSON/Markdown)
+
+## Features
+- Config-driven ingestion (EVDS first; extensible providers)
+- Local storage (SQLite/DuckDB)
+- Metrics: YoY, MoM, rolling stats (z-score, volatility, etc.)
+- Rule-based signals with severities
+- Reports in JSON and Markdown
+- End-to-end `run` command for daily/weekly profiles
+
+## Quickstart
+1) Copy `.env.example` to `.env` and set EVDS key
+2) Validate config
+3) Ingest series
+4) Compute metrics
+5) Generate signals
+6) Export report
+
+## Example commands
+- `ese validate --config configs/sources.yaml`
+- `ese ingest --source evds --series CPI,USDTRY --start 2010-01-01`
+- `ese compute --metrics yoy,mom,rolling_z --series CPI`
+- `ese signal --rules configs/rules.yaml`
+- `ese report --format md --out reports/latest.md`
+
+## Output
+Signals are emitted with timestamps and severity levels and can be exported as:
+- JSON (machine-readable)
+- Markdown (shareable report)
+
+## Roadmap
+- More providers (FRED/ECB)
+- Revision/vintage support
+- Scheduling integrations (cron/systemd)
+- Basic dashboard exporter
