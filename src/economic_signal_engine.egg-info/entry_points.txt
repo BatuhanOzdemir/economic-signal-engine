@@ -1,0 +1,2 @@
+[console_scripts]
+ese = ese.__main__:main

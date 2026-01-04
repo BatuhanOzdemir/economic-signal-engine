@@ -1,29 +1,25 @@
 import sys
 import argparse
+from ese.cli.validate import handle_validate
+from ese.cli.ingest import handle_ingest
+from ese.cli.compute import handle_compute
+from ese.cli.signal import handle_signal
+from ese.cli.report import handle_report
+from ese.cli.run  import handle_run
 
 
-def handle_validate(args):
-	print("Validate")
+handle_validate = handle_validate
 
+handle_ingest = handle_ingest
 
-def handle_ingest(args):
-	print("Ingest")
+handle_compute = handle_compute
 
+handle_signal = handle_signal
 
-def handle_compute(args):
-	print("Compute")
+handle_report = handle_report
 
+handle_run = handle_run
 
-def handle_signal(args):
-	print("Signal")
-
-
-def handle_report(args):
-	print("report")
-
-
-def handle_run(args):
-	print("Run")
 
 
 def main():
@@ -59,7 +55,7 @@ def main():
 	args = parser.parse_args()
 
 	if hasattr(args,"func"):
-		args.func(args)
+		args.func()
 	else:
 		parser.print_help()
 

@@ -1,0 +1,4 @@
+jobs:
+  - name: "Daily Exchange Rate"
+    task: "ingest"
+    source: "tcmb_exchange_rates"

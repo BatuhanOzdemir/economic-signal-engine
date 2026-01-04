@@ -1,0 +1,14 @@
+rules:
+  - id: high_inflation_alert
+    name: "Yüksek Enflasyon Uyarısı"
+    metric: "TÜFE_Yillik_Degisim"
+    condition: ">"
+    threshold: 50.0
+    signal_type: "CRITICAL"
+
+  - id: exchange_volatility
+    name: "Doviz kuru oynaklığı"
+    metric: "USD_TRRY_Daily_Change"
+    condition: ">"
+    threshold: 2.0
+    signal_type: "WARNING"
