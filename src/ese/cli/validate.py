@@ -18,9 +18,10 @@ def handle_validate():
 		with open(file_sources,"r",encoding="utf-8") as sources:
 			sources = yaml.safe_load(sources)
 			for source in sources["sources"]:
-				if source in ["TCMB", "ECB", "FED"]:
+				if sources["sources"][source] != "":
 					print("Source " + source + " is fine")
 				else:
+					print("Error: Source name or link is wrong or incomplete")
 					return sys.exit(1)
 	except yaml.YAMLError as err:
 		print("Something went wrong when opening the sources.")
@@ -31,6 +32,7 @@ def handle_validate():
 			for rule in rules["rules"]:
 				for key in rule.keys():
 					if rule[key] == "":
+						print("One or more features of a rule is missing")
 						return sys.exit(1)
 			print("Rules loaded successfully")
 	except yaml.YAMLError as err:
@@ -42,6 +44,7 @@ def handle_validate():
 			for schedule in schedules["jobs"]:
 				for key in schedule.keys():
 					if schedule[key] == "":
+						print("Jobs are  fully defined")
 						return sys.exit(1)
 			print("Schedules loaded successfully")
 	except yaml.YAMLError as err:
