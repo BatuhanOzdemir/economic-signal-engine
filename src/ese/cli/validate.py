@@ -1,10 +1,15 @@
 import yaml
+import sys
 from pathlib import Path
 
 
-file_sources = Path("C:\\Users\\batuh\Desktop\economic-signal-engine\configs\sources.yaml")
-file_rules = Path("C:\\Users\\batuh\Desktop\economic-signal-engine\configs\\rules.yaml")
-file_schedules = Path("C:\\Users\\batuh\Desktop\economic-signal-engine\configs\schedules.yaml")
+current_file = Path(__file__).resolve()
+
+project_dir = current_file.parents[3]
+
+file_sources = Path(project_dir, "configs", "sources.yaml")
+file_rules = Path(project_dir, "configs", "rules.yaml")
+file_schedules = Path(project_dir, "configs", "schedules.yaml")
 
 
 def handle_validate():
@@ -16,7 +21,7 @@ def handle_validate():
 				if source in ["TCMB", "ECB", "FED"]:
 					print("Source " + source + " is fine")
 				else:
-					return False
+					return sys.exit(1)
 	except yaml.YAMLError as err:
 		print("Something went wrong when opening the sources.")
 
@@ -26,7 +31,7 @@ def handle_validate():
 			for rule in rules["rules"]:
 				for key in rule.keys():
 					if rule[key] == "":
-						return False
+						return sys.exit(1)
 			print("Rules loaded successfully")
 	except yaml.YAMLError as err:
 		print("Something went wrong when opening the rules.")
@@ -37,7 +42,7 @@ def handle_validate():
 			for schedule in schedules["jobs"]:
 				for key in schedule.keys():
 					if schedule[key] == "":
-						return False
+						return sys.exit(1)
 			print("Schedules loaded successfully")
 	except yaml.YAMLError as err:
 		print("Something went wrong when opening the schedules.")

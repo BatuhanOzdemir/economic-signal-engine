@@ -8,20 +8,6 @@ from ese.cli.report import handle_report
 from ese.cli.run  import handle_run
 
 
-handle_validate = handle_validate
-
-handle_ingest = handle_ingest
-
-handle_compute = handle_compute
-
-handle_signal = handle_signal
-
-handle_report = handle_report
-
-handle_run = handle_run
-
-
-
 def main():
 	args = sys.argv[1:]
 
