@@ -20,6 +20,22 @@ def main():
 
 	#ingest
 	ing_parser = subparsers.add_parser("ingest",help="Ingest time series from provider")
+	ing_parser.add_argument("--source", default="TCMB",help="Source provider")
+	ing_parser.add_argument("--series",help="Select one of the series")
+	ing_parser.add_argument("--stardate",help="Enter the start date")
+	ing_parser.add_argument("--enddate",help="Enter the end date")
+	ing_parser.add_argument("--type", help="Select the type json, xml or csv")
+	ing_parser.add_argument("--aggeration", help="Select one of the aggerations "
+	                                     "Average:avg, Minimum:min, Maximum:max, Begining:first, End:last, Cumulative:sum")
+	ing_parser.add_argument("--formulas", help="Select one of the following formulas "
+	                                    "Default=0, Percent Change=1, Difference=2, Yearly Percentage Change=3, "
+	                                    "Yearly Difference=4, Percentage Change YoY=5, Difference YoY=6, Moving Average=7"
+	                                           "Moving Sum=8")
+	ing_parser.add_argument("--frequency", help="Select the frequency of the time series  Daily=1, Workday=2, Weekly=3,"
+	                                          "Twice a Month=4, Monthly=5, Three monthly=6, Six Monthly=7, Year=8")
+	ing_parser.add_argument("--listCategories",help="Lists available categories")
+	ing_parser.add_argument("--listSeries",help="Lists available series of a category")
+
 	ing_parser.set_defaults(func=handle_ingest)
 
 	#compute
@@ -41,7 +57,7 @@ def main():
 	args = parser.parse_args()
 
 	if hasattr(args,"func"):
-		args.func()
+		args.func(args)
 	else:
 		parser.print_help()
 
