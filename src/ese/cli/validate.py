@@ -12,7 +12,7 @@ file_rules = Path(project_dir, "configs", "rules.yaml")
 file_schedules = Path(project_dir, "configs", "schedules.yaml")
 
 
-def handle_validate():
+def handle_validate(args):
 
 	try:
 		with open(file_sources,"r",encoding="utf-8") as sources:

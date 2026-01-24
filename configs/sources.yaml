@@ -1,4 +1,4 @@
 sources:
-     TCMB: "https://evds2.tcmb.gov.tr/service/evds"
+     TCMB: "https://evds2.tcmb.gov.tr/service/evds/"
      ECB:  "https://data.ecb.europa.eu/"
      FED:  "https://api.stlouisfed.org/"
