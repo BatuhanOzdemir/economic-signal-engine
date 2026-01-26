@@ -44,8 +44,10 @@ def make_request(url,params={}):
 	request = requests.Session()
 	params = param_generator(params)
 	response = request.get(url+params, headers={"key":"8lqJtipjux"})  #API key is harcoded here but will later be stored in an enviroment variable
+	response_raw =json.loads(response.text)
+	response_df = pd.DataFrame(response_raw)
 	request.close()
-	return response.content
+	return response_df
 
 
 def listCategoriesTCMB():
@@ -109,22 +111,16 @@ def handle_ingest(args):
 		print(series.to_string())
 
 
-
-
-
-
-
-
 	params = {"series":series,
-	          "startdate":startdate,
-	          "enddate":enddate,
+	          "startDate":startdate,
+	          "endDate":enddate,
 	          "type":type,
 	          "aggregation":aggregation,
 	          "formulas":formulas,
 	          "frequency":frequency}
 
 	result = make_request(source_link, params)
-	print(result)
+	print(result.to_string())
 
 
 
